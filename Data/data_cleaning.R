@@ -36,6 +36,14 @@ data_djibouti$country <- "Djibouti"
 ## Combining datasets for combined analysis
 data_combined <- rbind(data_somalia, data_somaliland, data_somali_region, data_djibouti, data_nep)
 
+## Format dates for all datasets
+data_somalia$event_date <- as.Date(trimws(data_somalia$event_date))
+data_somaliland$event_date <- as.Date(trimws(data_somaliland$event_date))
+data_somali_region$event_date <- as.Date(trimws(data_somali_region$event_date))
+data_djibouti$event_date <- as.Date(trimws(data_djibouti$event_date))
+data_nep$event_date <- as.Date(trimws(data_nep$event_date))
+data_combined$event_date <- as.Date(trimws(data_combined$event_date))
+
 ## Saving each dataset as individual .RData files
 save(data_somalia, file = "Data/data_somalia.RData")
 save(data_somaliland, file = "Data/data_somaliland.RData")
