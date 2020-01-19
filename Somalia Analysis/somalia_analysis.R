@@ -15,6 +15,10 @@ ggplot(data_somalia, aes(data_somalia$year, data_somalia$fatalities)) +
   ggsave(filename = "Somalia Analysis/Figures/AnnualFatalities.png", last_plot(),
          width = 20, height = 10, dpi = 400)
 
+## Calculating sum of fatalities in 2017 (highest year)
+sum_2017 <- data_somalia[data_somalia$year == 2017,]
+print(sum(sum_2017$fatalities))
+
 ## Creating a categorical year variable
 data_somalia$year_cat <- ifelse(data_somalia$year %in% 1997:1999, "1997-1999",
                          ifelse(data_somalia$year %in% 2000:2004, "2000-2004",
