@@ -29,13 +29,17 @@ data_somalia$president <- factor(data_somalia$president,
                                             "Mohamed Farmaajo (Feb 2017-present)"))
 
 ## Graphing fatalities by president
+fat_pres <- aggregate(data_somalia$fatalities, by=list(pres = data_somalia$president), 
+                          FUN = sum)
+names(fat_pres) <- c("pres", "fatalities")
+
 ggplot(fat_pres, aes(fat_pres$pres, fat_pres$fatalities, fill = fat_pres$pres)) + 
   geom_col() + coord_flip() + 
   theme(axis.text.y = element_text(size=15, face = "bold"), legend.position = "none",
         axis.text.x = element_text(size=15),
         plot.title = element_text(size = 20, hjust = 0.5, face = "bold")) + 
   labs(x= NULL, y = NULL, title = "Conflict fatalities in Somalia by president",
-       caption = "Data of January 11, 2020
+       caption = "Data as of January 11, 2020
        Source: ACLED Data, Somali Conflict Analysis Group") +
   geom_text(aes(label = fat_pres$fatalities), size = 7.5, hjust = "right") + 
   ggsave(filename = "Somalia Analysis/Figures/PresFatalities.png", last_plot(),
