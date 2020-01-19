@@ -47,5 +47,12 @@ ggplot(fatalities, aes(year_cat, fatalities, fill = year_cat)) +
   ggsave(filename = "Somalia Analysis/Figures/CatYearFatalities.png", last_plot(),
          width = 20, height = 10, dpi = 400)
 
+## Calculating percentage for 2015-2019
+sum_2015_2019 <- fatalities[fatalities$year_cat == "2015-2019",]
+sum_2015_2019 <- sum(sum_2015_2019$fatalities)
 
+sum_total <- sum(fatalities$fatalities)
+
+pct_2015_2019 <- (sum_2015_2019/sum_total) * 100
+print(pct_2015_2019)
 
