@@ -42,7 +42,7 @@ ggplot(fatalities, aes(year_cat, fatalities, fill = year_cat)) +
         legend.position = "none") +
   geom_text(aes(label = fatalities), vjust = -0.5, size = 7.5) +
   labs(x= NULL, y = NULL, title = "Fatalities in Somalia by grouped years",
-       caption = "Data as of January 10, 2020
+       caption = "Data as of January 11, 2020
        Source: ACLED, Somali Conflict Analysis Group") +
   ggsave(filename = "Somalia Analysis/Figures/CatYearFatalities.png", last_plot(),
          width = 20, height = 10, dpi = 400)

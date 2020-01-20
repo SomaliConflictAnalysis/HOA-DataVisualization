@@ -59,8 +59,9 @@ ggplot(fat_pres_ter, aes(fat_pres_ter$pres, fat_pres_ter$fatalities, fill = fat_
         axis.text.x = element_text(size=15),
         plot.title = element_text(size = 20, hjust = 0.5, face = "bold")) +  
   labs(x= NULL, y = NULL, title = "Terror related fatalities in Somalia by president",
-       caption = "Data as of January 10, 2020
+       caption = "Data as of January 11, 2020
        Source: ACLED, Somali Conflict Analysis Group") +
   geom_text(aes(label = fat_pres_ter$fatalities), size = 7.5, hjust = "right") + 
   ggsave(filename = "Somalia Analysis/Figures/PresTerrorFatalities.png", last_plot(),
          width = 20, height = 10, dpi = 400)
+
