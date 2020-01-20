@@ -65,3 +65,23 @@ ggplot(fat_pres_ter, aes(fat_pres_ter$pres, fat_pres_ter$fatalities, fill = fat_
   ggsave(filename = "Somalia Analysis/Figures/PresTerrorFatalities.png", last_plot(),
          width = 20, height = 10, dpi = 400)
 
+## Creating dataset for fatalities involving civilians
+som_civilians <- data_somalia[(data_somalia$actor1 == "Civilians (Somalia)" | 
+                                 data_somalia$actor2 == "Civilians (Somalia)"), ]
+
+## Graphing fatalities involving civilians by president
+fat_pres_civ <- aggregate(som_civilians$fatalities, by=list(pres = som_civilians$president), 
+                          FUN = sum)
+names(fat_pres_civ) <- c("pres", "fatalities")
+
+ggplot(fat_pres_civ, aes(fat_pres_civ$pres, fat_pres_civ$fatalities, fill = fat_pres_civ$pres)) + 
+  geom_col() + coord_flip() + 
+  theme(axis.text.y = element_text(size=15, face = "bold"), legend.position = "none",
+        axis.text.x = element_text(size=15),
+        plot.title = element_text(size = 20, hjust = 0.5, face = "bold")) +  
+  labs(x= NULL, y = NULL, title = "Fatalities involving civilians Somalia by president",
+       caption = "Data as of January 11, 2020
+       Source: ACLED, Somali Conflict Analysis Group") +
+  geom_text(aes(label = fat_pres_civ$fatalities), size = 7.5, hjust = "right") + 
+  ggsave(filename = "Somalia Analysis/Figures/PresCivFatalities.png", last_plot(),
+         width = 20, height = 10, dpi = 400)
