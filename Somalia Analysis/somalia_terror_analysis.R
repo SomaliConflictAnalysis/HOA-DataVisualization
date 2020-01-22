@@ -54,3 +54,31 @@ print(sum_total)
 
 pct_2015_2019 <- (sum_2015_2019/sum_total) * 100
 print(pct_2015_2019)
+
+## Calculating terror fatalities by province
+fat_prov <- aggregate(som_terrorism$fatalities, by = list(prov = som_terrorism$admin1), FUN = sum)
+fat_prov <- as.data.frame(fat_prov)
+names(fat_prov) <- c("prov", "fatalities")
+
+## Graphing terror fatalities by province in Somalia
+ggplot(fat_prov, aes(prov, fatalities)) + 
+  geom_col(fill = "#e34a33")+
+  theme(axis.text.x = element_text(size=15, face = "bold"),
+        axis.text.y = element_text(size=15),
+        plot.title = element_text(size = 40, face = "bold"),
+        plot.caption = element_text(size = 12.5)) + 
+  geom_text(aes(label = fatalities), vjust = -0.5, size = 7.5) + 
+  labs(x= NULL, y = NULL, title = "Terror-related fatalities in Somalia by province (1997-2020)",
+       caption = "Data as of January 11, 2020
+       Source: ACLED, Somali Conflict Analysis Group") +
+  ggsave(filename = "Somalia Analysis/Figures/TerrorProvinceFatalities.png", last_plot(),
+         width = 20, height = 10, dpi = 400)
+
+## Calculating percentage for Banadir
+sum_banadir <- fat_prov[fat_prov$prov == "Banadir",]
+sum_banadir <- sum(sum_banadir$fatalities)
+
+sum_total <- sum(fat_prov$fatalities)
+
+pct_banadir <- (sum_banadir/sum_total) * 100
+print(pct_banadir)
