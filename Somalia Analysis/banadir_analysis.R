@@ -1,8 +1,8 @@
 ## Load Somalia data to environment
-load(file = "Data/data_banadir.RData")
+load(file = "Data/data_somalia.RData")
 
 ## Creating dataset for terrorism only fatalities
-data_banadir <- data_banadir[data_banadir$admin1 == "Banadir", ]
+data_banadir <- data_somalia[data_somalia$admin1 == "Banadir", ]
 
 ## Graphing fatalities per year in Banadir
 library(ggplot2)
@@ -113,3 +113,92 @@ print(pct_change_hsm)
 pct_change_farmaajo <- (sum_farmaajo - sum_hsm)/sum_hsm * 100
 print(pct_change_farmaajo)
 
+## Graphing fatalities by type in Banadir
+fat_type <- aggregate(data_banadir$fatalities, by=list(type = data_banadir$event_type), 
+                      FUN = sum)
+names(fat_type) <- c("type", "fatalities")
+
+ggplot(fat_type, aes(type, fatalities)) + 
+  geom_col(fill = "#3182bd")+
+  theme(axis.text.x = element_text(size=15, face = "bold"),
+        axis.text.y = element_text(size=15),
+        plot.title = element_text(size = 40, face = "bold"),
+        plot.caption = element_text(size = 12.5)) + 
+  labs(x= NULL, y = NULL, title = "Fatalities in Banadir by type (1997-2020)",
+       caption = "Data as of January 11, 2020
+       Source: ACLED, Somali Conflict Analysis Group") +
+  geom_text(aes(label = fat_type$fatalities), size = 7.5, vjust = -0.5) + 
+  ggsave(filename = "Somalia Analysis/Figures/BanadirTypeFatalities.png", last_plot(),
+         width = 20, height = 10, dpi = 400)
+
+## Calculating totals for the top 3 categories
+sum_battles <- fat_type[fat_type$type == "Battles",]
+sum_battles <- sum(sum_battles$fatalities)
+print(sum_battles/sum(fat_type$fatalities) *100)
+
+
+sum_terror <- fat_type[fat_type$type == "Explosions/Remote violence",]
+sum_terror <- sum(sum_terror$fatalities)
+print(sum_terror/sum(fat_type$fatalities)*100)
+
+sum_civ_violence <- fat_type[fat_type$type == "Violence against civilians",]
+sum_civ_violence <- sum(sum_civ_violence$fatalities)
+print(sum_civ_violence/sum(fat_type$fatalities)*100)
+
+## Examining terror fatalities in Banadir
+terror_banadir <- data_banadir[data_banadir$event_type == "Explosions/Remote violence",]
+
+## Calculating terror fatalities in Banadir by year_cat
+ban_ter_year <- aggregate(terror_banadir$fatalities, by = list(year_cat = terror_banadir$year_cat), FUN = sum)
+ban_ter_year <- as.data.frame(ban_ter_year)
+names(ban_ter_year) <- c("year_cat", "fatalities")
+
+## Graphing terror fatalities in Banadir by year categories
+ggplot(ban_ter_year, aes(year_cat, fatalities, fill = year_cat)) + 
+  geom_col()+
+  theme(axis.text.x = element_text(size=15, face = "bold"),
+        axis.text.y = element_text(size=15),
+        plot.title = element_text(size = 40, face = "bold"),
+        plot.caption = element_text(size = 12.5),
+        legend.position = "none") +
+  geom_text(aes(label = fatalities), vjust = -0.5, size = 7.5) +
+  labs(x= NULL, y = NULL, title = "Terror-related fatalities in Banadir by grouped years",
+       caption = "Data as of January 11, 2020
+       Source: ACLED, Somali Conflict Analysis Group") +
+  ggsave(filename = "Somalia Analysis/Figures/BanadirTerrCatYearFatalities.png", last_plot(),
+         width = 20, height = 10, dpi = 400)
+
+## Calculating terror fatalities in Banadir by president
+ban_ter_pres <- aggregate(terror_banadir$fatalities, by = list(pres = terror_banadir$president), FUN = sum)
+ban_ter_pres <- as.data.frame(ban_ter_pres)
+names(ban_ter_pres) <- c("president", "fatalities")
+
+## Graphing terror fatalities in Banadir by president
+ggplot(ban_ter_pres, aes(president, fatalities, fill = president)) + 
+  geom_col() + coord_flip() + 
+  theme(axis.text.y = element_text(size=15, face = "bold"), legend.position = "none",
+        axis.text.x = element_text(size=15),
+        plot.title = element_text(size = 40, face = "bold"),
+        plot.caption = element_text(size = 12.5)) + 
+  labs(x= NULL, y = NULL, title = "Terror-related fatalities in Banadir by president",
+       caption = "Data as of January 11, 2020
+       Source: ACLED Data, Somali Conflict Analysis Group") +
+  geom_text(aes(label = fatalities), size = 7.5, hjust = "right") + 
+  ggsave(filename = "Somalia Analysis/Figures/BanadirPresTerFatalities.png", last_plot(),
+         width = 20, height = 10, dpi = 400)
+
+## Calculating fatality counts for Sharif, HSM, Farmaajo
+sum_sharif <- ban_ter_pres[ban_ter_pres$president == "Sharif Sh. Ahmed (Jan 2009-Aug 2012)", ]
+sum_sharif <- sum(sum_sharif$fatalities)
+sum_hsm <- ban_ter_pres[ban_ter_pres$president == "Hassan Sh. Mohamud (Sep 2012-Feb 2017)", ]
+sum_hsm <- sum(sum_hsm$fatalities)
+sum_farmaajo <- ban_ter_pres[ban_ter_pres$president == "Mohamed Farmaajo (Feb 2017-present)", ]
+sum_farmaajo <- sum(sum_farmaajo$fatalities)
+
+## Calculating percent change from Sharif to HSM
+pct_change_hsm <- (sum_hsm - sum_sharif)/sum_sharif * 100
+print(pct_change_hsm)
+
+## Calculating percent change from HSM to Farmaajo
+pct_change_farmaajo <- (sum_farmaajo - sum_hsm)/sum_hsm * 100
+print(pct_change_farmaajo)
