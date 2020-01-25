@@ -15,7 +15,7 @@ president <- ifelse((data_somalia$event_date %between% c("1991-01-27", "1997-01-
                 as.character("Sharif Sh. Ahmed (Jan 2009-Aug 2012)"),
               ifelse((data_somalia$event_date %between% c("2012-09-16","2017-02-16")),
                 as.character("Hassan Sh. Mohamud (Sep 2012-Feb 2017)"),
-              ifelse((data_somalia$event_date %between% c("2017-02-17", "2020-01-17")), 
+              ifelse((data_somalia$event_date %between% c("2017-02-17", "2020-01-30")), 
                 as.character("Mohamed Farmaajo (Feb 2017-present)"), 
               as.character("Fatalities during acting/interim president terms"))))))))
 data_somalia$president <- president
@@ -39,7 +39,7 @@ ggplot(fat_pres, aes(fat_pres$pres, fat_pres$fatalities, fill = fat_pres$pres)) 
         axis.text.x = element_text(size=15),
         plot.title = element_text(size = 20, hjust = 0.5, face = "bold")) + 
   labs(x= NULL, y = NULL, title = "Conflict fatalities in Somalia by president",
-       caption = "Data as of January 11, 2020
+       caption = "Data as of January 18, 2020
        Source: ACLED Data, Somali Conflict Analysis Group") +
   geom_text(aes(label = fat_pres$fatalities), size = 7.5, hjust = "right") + 
   ggsave(filename = "Somalia Analysis/Figures/PresFatalities.png", last_plot(),
@@ -59,7 +59,7 @@ ggplot(fat_pres_ter, aes(fat_pres_ter$pres, fat_pres_ter$fatalities, fill = fat_
         axis.text.x = element_text(size=15),
         plot.title = element_text(size = 20, hjust = 0.5, face = "bold")) +  
   labs(x= NULL, y = NULL, title = "Terror related fatalities in Somalia by president",
-       caption = "Data as of January 11, 2020
+       caption = "Data as of January 18, 2020
        Source: ACLED, Somali Conflict Analysis Group") +
   geom_text(aes(label = fat_pres_ter$fatalities), size = 7.5, hjust = "right") + 
   ggsave(filename = "Somalia Analysis/Figures/PresTerrorFatalities.png", last_plot(),
@@ -80,7 +80,7 @@ ggplot(fat_pres_civ, aes(fat_pres_civ$pres, fat_pres_civ$fatalities, fill = fat_
         axis.text.x = element_text(size=15),
         plot.title = element_text(size = 20, hjust = 0.5, face = "bold")) +  
   labs(x= NULL, y = NULL, title = "Fatalities involving civilians Somalia by president",
-       caption = "Data as of January 11, 2020
+       caption = "Data as of January 18, 2020
        Source: ACLED, Somali Conflict Analysis Group") +
   geom_text(aes(label = fat_pres_civ$fatalities), size = 7.5, hjust = "right") + 
   ggsave(filename = "Somalia Analysis/Figures/PresCivFatalities.png", last_plot(),

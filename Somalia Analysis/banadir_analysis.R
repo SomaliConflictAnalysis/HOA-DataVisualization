@@ -13,7 +13,7 @@ ggplot(data_banadir, aes(data_banadir$year, data_banadir$fatalities)) +
         plot.title = element_text(size = 40, face = "bold"),
         plot.caption = element_text(size = 12.5)) + 
   labs(x= NULL, y = NULL, title = "Fatalities in Banadir by year",
-       caption = "Data as of January 11, 2020
+       caption = "Data as of January 18, 2020
        Source: ACLED, Somali Conflict Analysis Group") +
   ggsave(filename = "Somalia Analysis/Figures/BanadirAnnFatalities.png", last_plot(),
          width = 20, height = 10, dpi = 400)
@@ -48,7 +48,7 @@ ggplot(fatalities, aes(year_cat, fatalities, fill = year_cat)) +
         legend.position = "none") +
   geom_text(aes(label = fatalities), vjust = -0.5, size = 7.5) +
   labs(x= NULL, y = NULL, title = "Fatalities in Banadir by grouped years",
-       caption = "Data as of January 11, 2020
+       caption = "Data as of January 18, 2020
        Source: ACLED, Somali Conflict Analysis Group") +
   ggsave(filename = "Somalia Analysis/Figures/BanadirCatYearFatalities.png", last_plot(),
          width = 20, height = 10, dpi = 400)
@@ -67,7 +67,7 @@ president <- ifelse((data_banadir$event_date %between% c("1991-01-27", "1997-01-
               as.character("Sharif Sh. Ahmed (Jan 2009-Aug 2012)"),
              ifelse((data_banadir$event_date %between% c("2012-09-16","2017-02-16")),
               as.character("Hassan Sh. Mohamud (Sep 2012-Feb 2017)"),
-             ifelse((data_banadir$event_date %between% c("2017-02-17", "2020-01-17")), 
+             ifelse((data_banadir$event_date %between% c("2017-02-17", "2020-01-30")), 
               as.character("Mohamed Farmaajo (Feb 2017-present)"), 
              as.character("Fatalities during acting/interim president terms"))))))))
 data_banadir$president <- president
@@ -91,7 +91,7 @@ ggplot(fat_pres, aes(fat_pres$pres, fat_pres$fatalities, fill = fat_pres$pres)) 
         axis.text.x = element_text(size=15),
         plot.title = element_text(size = 40, face = "bold")) + 
   labs(x= NULL, y = NULL, title = "Fatalities in Banadir by president",
-       caption = "Data as of January 11, 2020
+       caption = "Data as of January 18, 2020
        Source: ACLED Data, Somali Conflict Analysis Group") +
   geom_text(aes(label = fat_pres$fatalities), size = 7.5, hjust = "right") + 
   ggsave(filename = "Somalia Analysis/Figures/BanadirPresFatalities.png", last_plot(),
@@ -125,7 +125,7 @@ ggplot(fat_type, aes(type, fatalities)) +
         plot.title = element_text(size = 40, face = "bold"),
         plot.caption = element_text(size = 12.5)) + 
   labs(x= NULL, y = NULL, title = "Fatalities in Banadir by type (1997-2020)",
-       caption = "Data as of January 11, 2020
+       caption = "Data as of January 18, 2020
        Source: ACLED, Somali Conflict Analysis Group") +
   geom_text(aes(label = fat_type$fatalities), size = 7.5, vjust = -0.5) + 
   ggsave(filename = "Somalia Analysis/Figures/BanadirTypeFatalities.png", last_plot(),
@@ -163,7 +163,7 @@ ggplot(ban_ter_year, aes(year_cat, fatalities, fill = year_cat)) +
         legend.position = "none") +
   geom_text(aes(label = fatalities), vjust = -0.5, size = 7.5) +
   labs(x= NULL, y = NULL, title = "Terror-related fatalities in Banadir by grouped years",
-       caption = "Data as of January 11, 2020
+       caption = "Data as of January 18, 2020
        Source: ACLED, Somali Conflict Analysis Group") +
   ggsave(filename = "Somalia Analysis/Figures/BanadirTerrCatYearFatalities.png", last_plot(),
          width = 20, height = 10, dpi = 400)
@@ -181,7 +181,7 @@ ggplot(ban_ter_pres, aes(president, fatalities, fill = president)) +
         plot.title = element_text(size = 40, face = "bold"),
         plot.caption = element_text(size = 12.5)) + 
   labs(x= NULL, y = NULL, title = "Terror-related fatalities in Banadir by president",
-       caption = "Data as of January 11, 2020
+       caption = "Data as of January 18, 2020
        Source: ACLED Data, Somali Conflict Analysis Group") +
   geom_text(aes(label = fatalities), size = 7.5, hjust = "right") + 
   ggsave(filename = "Somalia Analysis/Figures/BanadirPresTerFatalities.png", last_plot(),

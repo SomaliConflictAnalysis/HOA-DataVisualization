@@ -14,7 +14,7 @@ ggplot(som_civilians, aes(som_civilians$year, som_civilians$fatalities)) +
         plot.title = element_text(hjust = 0.5, size = 20, face = "bold"),
         plot.caption = element_text(size = 12.5)) + 
   labs(x= NULL, y = NULL, title = "Fatalities involving civilians in Somalia by year",
-       caption = "Data as of January 11, 2020
+       caption = "Data as of January 18, 2020
        Source: ACLED, Somali Conflict Analysis Group") +
   ggsave(filename = "Somalia Analysis/Figures/AnnualCivFatalities.png", last_plot(),
          width = 20, height = 10, dpi = 400)
@@ -42,7 +42,7 @@ ggplot(fatalities, aes(year_cat, fatalities, fill = year_cat)) +
         legend.position = "none") +
   geom_text(aes(label = fatalities), vjust = -0.5, size = 7.5) +
   labs(x= NULL, y = NULL, title = "Fatalities involving civilians in Somalia by grouped years",
-       caption = "Data as of January 11, 2020
+       caption = "Data as of January 18, 2020
        Source: ACLED, Somali Conflict Analysis Group") +
   ggsave(filename = "Somalia Analysis/Figures/CivCatYearFatalities.png", last_plot(),
          width = 20, height = 10, dpi = 400)
@@ -75,7 +75,7 @@ ggplot(fat_prov, aes(prov, fatalities)) +
         plot.caption = element_text(size = 12.5)) + 
   geom_text(aes(label = fatalities), vjust = -0.5, size = 7.5) + 
   labs(x= NULL, y = NULL, title = "Civilian-involved fatalities in Somalia by province (1997-2020)",
-       caption = "Data as of January 11, 2020
+       caption = "Data as of January 18, 2020
        Source: ACLED, Somali Conflict Analysis Group") +
   ggsave(filename = "Somalia Analysis/Figures/CivProvinceFatalities.png", last_plot(),
          width = 20, height = 10, dpi = 400)
