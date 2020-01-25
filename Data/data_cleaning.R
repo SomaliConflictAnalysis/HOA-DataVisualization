@@ -1,8 +1,8 @@
 ## Import Casualty Data
-somalia_raw <- read.csv("Data/1900-01-01-2020-01-16-Somalia.csv")
-ethiopia_raw <- read.csv("Data/1900-01-01-2020-01-16-Ethiopia.csv")
-djibouti_raw <- read.csv("Data/1900-01-01-2020-01-16-Djibouti.csv")
-kenya_raw <- read.csv("Data/1900-01-01-2020-01-16-Kenya.csv")
+somalia_raw <- read.csv("Data/Somalia.csv")
+ethiopia_raw <- read.csv("Data/Ethiopia.csv")
+djibouti_raw <- read.csv("Data/Djibouti.csv")
+kenya_raw <- read.csv("Data/Kenya.csv")
 
 ## Creating object to keep columns
 keep <- c("event_date", "year", "event_type", "sub_event_type", "actor1", "actor2", "admin1", 
