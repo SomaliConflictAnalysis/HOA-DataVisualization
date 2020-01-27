@@ -49,7 +49,7 @@ print(sum(data_laaska$fatalities)/sum(data_sool$fatalities) * 100)
 ## Create dataset for Togdheer 
 data_togdheer <- data_somaliland[data_somaliland$admin1 == "Togdheer", ]
 
-## Graph fatalities in Sool by town
+## Graph fatalities in Togdheer by town
 ggplot(data_togdheer[which(data_togdheer$fatalities >0),], aes(location, fatalities)) + 
   geom_col(fill = "#1a9641")+ coord_flip() +
   theme(axis.text.x = element_text(size=25), legend.position = "none",
@@ -65,3 +65,28 @@ ggplot(data_togdheer[which(data_togdheer$fatalities >0),], aes(location, fatalit
 ## Calculate percentage of fatalities in Buuhoodle
 data_buuhoodle <- data_togdheer[data_togdheer$location == "Buuhoodle",]
 print(sum(data_buuhoodle$fatalities)/sum(data_togdheer$fatalities) * 100)
+
+## Create dataset for Sanaag
+data_sanaag <- data_somaliland[data_somaliland$admin1 == "Sanaag", ]
+
+## Graph fatalities in Sanaag by town
+ggplot(data_sanaag[which(data_sanaag$fatalities >0),], aes(location, fatalities)) + 
+  geom_col(fill = "#d95f0e")+ coord_flip() +
+  theme(axis.text.x = element_text(size=25), legend.position = "none",
+        axis.text.y = element_text(size=25),
+        plot.title = element_text(size = 40, face = "bold"),
+        plot.caption = element_text(size = 20)) + 
+  labs(x= NULL, y = NULL, title = "Fatalities in Sanaag by town (1997-2020)",
+       caption = "Data as of January 18, 2020
+       Source: ACLED, Somali Conflict Analysis Group") +
+  ggsave(filename = "Somaliland Analysis/Figures/SanaagFatalities.png", last_plot(),
+         width = 20, height = 20, dpi = 400)
+
+## Calculate sums of Sanaag (total), Ceerigaabo, Ceelafweyn, Dararweyne
+print(sum(data_sanaag$fatalities))
+data_ceerigaabo <- data_sanaag[data_sanaag$location == "Ceerigaabo",]
+print(sum(data_ceerigaabo$fatalities))
+data_ceelafweyn <- data_sanaag[data_sanaag$location == "Ceel Afweyn",]
+print(sum(data_ceelafweyn$fatalities))
+data_dararweyne <- data_sanaag[data_sanaag$location == "Dararweyne",]
+print(sum(data_dararweyne$fatalities))
