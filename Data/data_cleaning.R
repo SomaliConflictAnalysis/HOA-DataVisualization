@@ -5,7 +5,7 @@ djibouti_raw <- read.csv("Data/Djibouti.csv")
 kenya_raw <- read.csv("Data/Kenya.csv")
 
 ## Creating object to keep columns
-keep <- c("event_date", "year", "event_type", "sub_event_type", "actor1", "actor2", "admin1", 
+keep <- c("event_date", "year", "event_type", "sub_event_type", "actor1", "actor2", "admin1", "admin2",
           "location", "fatalities")
 
 ## New Datasets with keep columns
