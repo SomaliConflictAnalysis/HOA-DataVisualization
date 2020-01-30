@@ -36,3 +36,31 @@ ggplot(data_somali_region, aes(data_somali_region$event_type, data_somali_region
 ## Calculating percentage of fatalities that were battles
 sum_battles <- data_somali_region[data_somali_region$event_type == "Battles",]
 print(sum(sum_battles$fatalities)/sum(data_somali_region$fatalities) * 100)
+
+## Calculating total fatalities by province
+fat_prov <- aggregate(data_somali_region$fatalities, by = list(prov = data_somali_region$admin2), FUN = sum)
+fat_prov <- as.data.frame(fat_prov)
+names(fat_prov) <- c("prov", "fatalities")
+
+## Graph fatalities in Somali Region by zone
+ggplot(fat_prov, aes(prov, fatalities)) + 
+  geom_col(fill = "#018571")+ 
+  theme(axis.text.x = element_text(size=15), legend.position = "none",
+        axis.text.y = element_text(size=15),
+        plot.title = element_text(size = 40, face = "bold"),
+        plot.caption = element_text(size = 12.5)) + 
+  labs(x= NULL, y = NULL, title = "Fatalities in Somali Region (Ethiopia) by zone (1997-2020)",
+       caption = "Data as of January 18, 2020
+       Source: ACLED, Somali Conflict Analysis Group") +
+  geom_text(aes(label = fatalities), vjust = -0.5, size = 7.5) + 
+  ggsave(filename = "Somali Region Analysis/Figures/ProvinceFatalities.png", last_plot(),
+         width = 20, height = 10, dpi = 400)
+
+## Calculating percentages for top 3 provinces
+fafan <- fat_prov[fat_prov$prov == "Fafan",]
+print(sum(fafan$fatalities)/sum(fat_prov$fatalities) * 100)
+jarar <- fat_prov[fat_prov$prov == "Jarar",]
+print(sum(jarar$fatalities)/sum(fat_prov$fatalities) * 100)
+korahe <- fat_prov[fat_prov$prov == "Korahe",]
+print(sum(korahe$fatalities)/sum(fat_prov$fatalities) * 100)
+
